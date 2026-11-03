@@ -251,7 +251,7 @@ private:
     static size_t decode_int(const char *&in) {
         size_t result = 0;
         uint8_t shift = 0;
-        while (*in >= 0) {
+        while (!(*in & 128)) {
             result |= size_t(*in) << shift;
             ++in;
             shift += 7;
