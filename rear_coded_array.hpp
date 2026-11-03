@@ -77,7 +77,7 @@ public:
         data.shrink_to_fit();
         pointers.shrink_to_fit();
         counts.shrink_to_fit();
-        buffer = new char[max_length]();
+        buffer = new char[max_length + 1]();
 
         size_t max_hdr_lcp = 0;
         size_t sum_hdr_lcp = 0;
@@ -98,7 +98,7 @@ public:
                   << "Avg strings per block   " << n / pointers.size() << std::endl;
     }
 
-    ~RearCodedArray() { delete buffer; }
+    ~RearCodedArray() { delete[] buffer; }
 
     size_t size_in_bytes() const {
         return data.size() * sizeof(data[0]) + pointers.size() * sizeof(pointers[0]) + sizeof(*this)

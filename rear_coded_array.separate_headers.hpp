@@ -100,7 +100,7 @@ public:
                   << "Avg strings per block   " << n / blocks_count() << std::endl;
     }
 
-    ~RearCodedArray() { delete buffer; }
+    ~RearCodedArray() { delete[] buffer; }
 
     size_t blocks_count() const { return info.size() - 1; }
 
