@@ -202,7 +202,7 @@ private:
     size_t block_rank(std::string_view pattern, size_t block) const {
         auto header_ptr = headers.data() + info[block].header_pointer;
         auto pattern_lcp = lcp64(pattern.data(), pattern.length(), header_ptr); // LCP b/w current string and pattern
-        if (pattern[pattern_lcp] < header_ptr[pattern_lcp])
+        if (uint8_t(pattern.data()[pattern_lcp]) < uint8_t(header_ptr[pattern_lcp]))
             return 0;
 
         auto data_ptr = data.data() + info[block].data_pointer;
@@ -220,7 +220,7 @@ private:
             if (prev_string_lcp == pattern_lcp) {
                 auto lcp = lcp64(pattern.data() + prev_string_lcp, pattern.length() - prev_string_lcp, data_ptr);
                 pattern_lcp += lcp;
-                if (pattern[pattern_lcp] < data_ptr[lcp])
+                if (uint8_t(pattern.data()[pattern_lcp]) < uint8_t(data_ptr[lcp]))
                     return j;
             }
 

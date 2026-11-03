@@ -162,7 +162,7 @@ private:
         data_ptr += buffer_end - buffer + 1;
         auto pattern_lcp = compute_lcp(pattern.data(), buffer); // LCP b/w current string and pattern
 
-        if (pattern[pattern_lcp] < buffer[pattern_lcp])
+        if (uint8_t(pattern.data()[pattern_lcp]) < uint8_t(buffer[pattern_lcp]))
             return 0;
 
         auto strings_in_block = counts[block + 1] - counts[block];
@@ -178,7 +178,7 @@ private:
             buffer_end = tmp;
             if (prev_string_lcp == pattern_lcp) {
                 pattern_lcp += compute_lcp(pattern.data() + prev_string_lcp, buffer + prev_string_lcp);
-                if (pattern[pattern_lcp] < buffer[pattern_lcp])
+                if (uint8_t(pattern.data()[pattern_lcp]) < uint8_t(buffer[pattern_lcp]))
                     return j;
             }
         }
