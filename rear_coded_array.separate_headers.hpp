@@ -74,7 +74,7 @@ public:
             prev = *first;
         }
 
-        headers.append('\0', sizeof(uint64_t));
+        headers.append(sizeof(uint64_t), '\0');
         info.emplace_back(n, data.size(), headers.size());
         info.shrink_to_fit();
         data.shrink_to_fit();
